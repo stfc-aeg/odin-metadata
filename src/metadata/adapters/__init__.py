@@ -1,0 +1,1 @@
+"""odin-metadata.adapters package __init__.py"""
