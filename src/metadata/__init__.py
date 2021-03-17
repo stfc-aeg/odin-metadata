@@ -1,4 +1,4 @@
-"""odin-metadata __init__.py"""
+"""metadata __init__.py"""
 
 from ._version import get_versions
 __version__ = get_versions()['version']

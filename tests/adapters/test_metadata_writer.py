@@ -6,7 +6,8 @@ if sys.version_info[0] == 3:  # pragma: no cover
 else:                         # pragma: no cover
     from mock import Mock, MagicMock, patch
 
-from odin.adapters.metadata_writer import MetadataWriterAdapter
+from metadata.adapters.metadata_writer import MetadataWriterAdapter
+# from odin.adapters.metadata_writer import MetadataWriterAdapter
 
 
 class MetadataWriterTestFixture(object):
