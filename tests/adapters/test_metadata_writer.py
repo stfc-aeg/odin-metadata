@@ -98,7 +98,7 @@ class TestMetadataWriterAdapter():
 
     def test_metadata_write_metadata(self, test_metadata_adapter):
         # how we mocking out the file?
-        with patch("odin.adapters.metadata_writer.h5py") as mock_h5py:
+        with patch("metadata.adapters.metadata_writer.h5py") as mock_h5py:
             mock_file = MagicMock()
             mock_h5py.File.return_value = mock_file
 
