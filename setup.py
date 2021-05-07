@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 import versioneer
 
 install_requires = [
-    'odin @ git+https://github.com/odin-detector/odin-control@master#egg=odin-control',
+    'odin-control @ git+https://github.com/odin-detector/odin-control@master#egg=odin-control',
     'pyzmq>=22.0',
     'h5py'
 ]
