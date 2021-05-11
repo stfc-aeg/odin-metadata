@@ -32,7 +32,7 @@ class MetadataWriterAdapter(ApiAdapter):
     @response_types("application/json", default="application/json")
     def get(self, path, request, with_metadata=False):
         """
-        Handle a HTTP GET request from a client, passing this to the Live Viewer object.
+        Handle a HTTP GET request from a client, passing this to the Metadata Writer object.
 
         :param path: The path to the resource requested by the GET request
         :param request: Additional request parameters
@@ -127,9 +127,7 @@ class MetadataWriter(object):
             file_path = path.join(self.dir, self.file_name)
             logging.debug("Opening file at location %s", file_path)
             hdf_file = h5py.File(file_path, 'r+')
-
         except IOError as err:
-
             logging.error("Failed to open file: %s", err)
             return
         try:
@@ -141,7 +139,10 @@ class MetadataWriter(object):
         hdf_file.close()
 
     def add_metadata_to_group(self, metadata, group):
-
+        """
+        This method adds metadata to a metadata group. It allows for recursive calls
+        in case nested metadata groups exist
+        """
         for key in metadata:
             if isinstance(metadata[key], dict):
                 logging.debug("Creating Metadata Subgroup: %s", key)
