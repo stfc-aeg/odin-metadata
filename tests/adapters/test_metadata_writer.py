@@ -1,12 +1,11 @@
 import pytest
 import sys
 
+from metadata.adapters.metadata_writer import MetadataWriterAdapter
 if sys.version_info[0] == 3:  # pragma: no cover
     from unittest.mock import Mock, MagicMock, patch
 else:                         # pragma: no cover
     from mock import Mock, MagicMock, patch
-
-from odin.adapters.metadata_writer import MetadataWriterAdapter
 
 
 class MetadataWriterTestFixture(object):
@@ -70,7 +69,7 @@ class TestMetadataWriterAdapter():
         assert response.status_code == 200
 
     def test_metadata_put(self, test_metadata_adapter):
-        
+
         expected_response = {"metadata": {"test": "Test Metadata"}}
 
         test_metadata_adapter.request.body = expected_response['metadata']
@@ -82,22 +81,9 @@ class TestMetadataWriterAdapter():
         assert response.data == expected_response
         assert response.status_code == 200
 
-    def test_metadata_long_path_put(self, test_metadata_adapter):
-
-        expected_response = {"deeper": {"nested_val": 125}}
-        test_metadata_adapter.put_path = "metadata/goDeep/deeper"
-        test_metadata_adapter.request.body = {'nested_val': 125}
-
-        response = test_metadata_adapter.adapter.put(
-            test_metadata_adapter.put_path, test_metadata_adapter.request
-        )
-        print(test_metadata_adapter.adapter.metadata_writer.get("metadata"))
-        assert response.data == expected_response
-        assert response.status_code == 200
-
     def test_metadata_write_metadata(self, test_metadata_adapter):
-        # how we mocking out the file?
-        with patch("odin.adapters.metadata_writer.h5py") as mock_h5py:
+
+        with patch("metadata.adapters.metadata_writer.h5py") as mock_h5py:
             mock_file = MagicMock()
             mock_h5py.File.return_value = mock_file
 
